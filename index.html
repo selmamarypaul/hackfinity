@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Expiry Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Food Expiry Tracker</h1>
+
+        <!-- Scan Button -->
+        <button id="start-scan-btn">Start Scanning</button>
+        <button id="stop-scan-btn" style="display: none;">Stop Scanning</button>
+
+        <!-- QR Code Scanner -->
+        <div id="qr-reader" style="width: 100%; height: 400px; margin-bottom: 20px; display: none;"></div>
+        <p id="scan-result"></p>
+
+        <!-- Expiring Products List -->
+        <h2>Products Nearing Expiry</h2>
+        <ul id="expiring-products"></ul>
+
+        <!-- Donation Button -->
+        <button id="donate-btn">Donate Selected Items</button>
+    </div>
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="script.js"></script>
+</body>
+</html>
