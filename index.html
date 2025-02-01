@@ -5,14 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Expiry Tracker</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Add QR Code Scanner library -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
 </head>
 <body>
     <div class="container">
         <h1>Food Expiry Tracker</h1>
 
-        <!-- Product Entry Form -->
+        <!-- QR Code Scanner -->
+        <div class="scanner-container">
+            <h2>Scan Product QR Code</h2>
+            <div id="qr-reader"></div>
+            <div id="qr-reader-results"></div>
+        </div>
+
+        <!-- Product Entry Form (Manual Entry Option) -->
         <div class="form-container">
-            <h2>Add Product</h2>
+            <h2>Manual Product Entry</h2>
             <form id="product-form">
                 <div class="form-group">
                     <label for="productName">Product Name:</label>
@@ -20,7 +29,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="productNumber">Product Number:</label>
+                    <label for="productNumber">Batch Number:</label>
                     <input type="text" id="productNumber" required>
                 </div>
 
@@ -38,14 +47,31 @@
             </form>
         </div>
 
-        <!-- Expiring Products List -->
+        <!-- Products List -->
         <div class="products-container">
-            <h2>Products Nearing Expiry</h2>
-            <ul id="expiring-products"></ul>
+            <h2>Product List</h2>
+            <div class="product-categories">
+                <div id="fresh-products">
+                    <h3>Fresh Products</h3>
+                    <ul class="product-list"></ul>
+                </div>
+                <div id="expiring-soon">
+                    <h3>Expiring Soon</h3>
+                    <ul class="product-list"></ul>
+                </div>
+                <div id="expired">
+                    <h3>Expired Products</h3>
+                    <ul class="product-list"></ul>
+                </div>
+            </div>
         </div>
 
-        <!-- Donation Button -->
-        <button id="donate-btn">Donate Selected Items</button>
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button id="donate-btn" class="action-btn">Donate Selected Items</button>
+            <button id="return-btn" class="action-btn">Return Selected Items</button>
+            <button id="recycle-btn" class="action-btn">Recycle Selected Items</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
