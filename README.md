@@ -1,4 +1,4 @@
-# HACKFINITY 🎯
+# FOOD EXPIRATION TRACKER 🎯
 
 
 ## Basic Details
@@ -41,69 +41,52 @@ For Software:
    
 
 For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
-
-### Implementation
-For Software:
+-Computer camera /webcam(for QR code scanning)
+### Implementation 
 # Installation
-[commands]
+-git clone [your repo link]
+
+-cd hackfinity
+
+-npm install
 
 # Run
-[commands]
+npm run dev
 
 ### Project Documentation
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-Add caption explaining what this shows
+![image](https://github.com/user-attachments/assets/6a8bf0da-035c-49e7-821e-4140e568a23f)
+"Track. Save. Donate. Reduce Food Waste Today!"
+![image](https://github.com/user-attachments/assets/49256db6-44b3-4518-9327-ac2d8de8d3f0)
+"Scan, Save, Share—Because Food Deserves a Second Chance."
 
-![Screenshot2](Add screenshot 2 here with proper name)
-Add caption explaining what this shows
 
-![Screenshot3](Add screenshot 3 here with proper name)
-Add caption explaining what this shows
 
-# Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-Add caption explaining your workflow
 
-For Hardware:
 
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-Add caption explaining connections
 
-![Schematic](Add your schematic diagram here)
-Add caption explaining the schematic
+
+
+![image](https://github.com/user-attachments/assets/874cd2f9-4b94-42ef-b63c-eff1a5cc0631)
+
+"Don’t Waste, Donate—Every Meal Matters!"
+
 
 # Build Photos
-![Team](Add photo of your team here)
+![WhatsApp Image 2025-02-02 at 10 49 56_da467ea7](https://github.com/user-attachments/assets/9db26b3b-434e-42c5-806e-1e25c6458cc0)
 
 
-![Components](Add photo of your components here)
-List out all components shown
 
-![Build](Add photos of build process here)
-Explain the build steps
-
-![Final](Add photo of final product here)
-Explain the final build
 
 ### Project Demo
-# Video
-[Add your demo video link here]
-Explain what the video demonstrates
-
-# Additional Demos
-[Add any extra demo materials/links]
-
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+-SELMA MARY PAUL: UI/UX DESIGN
+
+-MERIN ELIZABETH EDGAR:HTML,CSS,JAVASCRIPT
+
+-THANUSHREE SURESH: HTML,CSS,JAVASCRIPT
 
 ---
 Made with ❤ at TinkerHub
