@@ -19,19 +19,18 @@
 
 body {
     font-family: var(--times-font);
-    background-image: url('https://www.un.org/sustainabledevelopment/wp-content/uploads/2018/05/E_SDG-goals_icons-individual-rgb-02.png');
+    background-image: url('path-to-your-image/zero-hunger-burlap.jpg');
     background-size: cover;
-    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: rgba(245, 245, 245, 0.95);
-    position: relative;
+    background-attachment: fixed;
     color: var(--sdg-dark);
     margin: 0;
     padding: 20px;
+    position: relative;
 }
 
-/* Add overlay to improve text readability */
+/* Update the overlay to be slightly darker and more textured */
 body::before {
     content: '';
     position: fixed;
@@ -39,7 +38,7 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.85);  /* Slightly more opaque */
     z-index: -1;
 }
 
@@ -47,15 +46,20 @@ body::before {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.92);
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 h1 {
     text-align: center;
-    color: var(--primary-color);
+    color: white;
     margin-bottom: 30px;
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    font-family: var(--times-font);
+    letter-spacing: 2px;
 }
 
 h2 {
@@ -65,11 +69,11 @@ h2 {
 
 /* Scanner Styles */
 .scanner-container {
-    background-color: var(--card-background);
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 30px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #qr-reader {
@@ -80,11 +84,11 @@ h2 {
 
 /* Form Styles */
 .form-container {
-    background-color: var(--card-background);
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 30px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
@@ -106,11 +110,11 @@ input {
 
 /* Products List Styles */
 .products-container {
-    background-color: var(--card-background);
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 30px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .product-categories {
@@ -139,23 +143,15 @@ input {
 }
 
 .product-item.expired {
-    border-left: 4px solid var(--sdg-red);
+    border-left: 4px solid #808080;
 }
 
 .product-item.expiring-soon {
-    border-left: 4px solid var(--sdg-yellow);
+    border-left: 4px solid #FFA500;
 }
 
-.fresh {
-    border-left: 4px solid var(--primary-color);
-}
-
-.expiring-soon {
-    border-left: 4px solid var(--warning-color);
-}
-
-.expired {
-    border-left: 4px solid var(--danger-color);
+.product-item.fresh {
+    border-left: 4px solid #4CAF50;
 }
 
 /* Button Styles */
@@ -174,7 +170,7 @@ input {
 }
 
 #donate-btn {
-    background-color: var(--sdg-red);
+    background-color: #4CAF50;
     color: white;
 }
 
@@ -187,14 +183,36 @@ input {
     opacity: 0.9;
 }
 
+/* Update header to complement the burlap texture */
 .header {
-    background: linear-gradient(135deg, var(--sdg-red) 0%, #c41e31 100%);
-    padding: 30px;
+    background: linear-gradient(135deg, #3d8c40 0%, #2d682f 95%);
+    padding: 40px 30px;
     border-radius: 15px;
     margin-bottom: 30px;
-    box-shadow: 0 4px 12px rgba(229, 36, 59, 0.2);
-    color: white;
-    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add texture overlay to header */
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('path-to-your-image/zero-hunger-burlap.jpg');
+    background-size: cover;
+    opacity: 0.1;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Ensure header content stays above the texture */
+.header * {
+    position: relative;
+    z-index: 1;
 }
 
 .reward-points {
@@ -209,7 +227,7 @@ input {
 .food-bank-select {
     background-color: white;
     padding: 12px;
-    border: 2px solid var(--sdg-yellow);
+    border: 2px solid #4CAF50;
     border-radius: 8px;
     font-family: var(--times-font);
     font-size: 1rem;
@@ -217,19 +235,19 @@ input {
 }
 
 .food-bank-select:focus {
-    border-color: var(--sdg-red);
-    outline: none;
+    border-color: #45a049;
 }
 
 /* Add styles for reward points display */
 .reward-points-container {
-    background: linear-gradient(135deg, var(--sdg-yellow) 0%, #e5b509 100%);
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
     padding: 15px 25px;
     border-radius: 25px;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    box-shadow: 0 4px 8px rgba(252, 195, 11, 0.2);
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.2);
 }
 
 .reward-points-icon {
@@ -243,10 +261,61 @@ input {
 
 /* Add stock level indicator */
 .stock-level {
-    background-color: var(--sdg-yellow);
-    color: var(--sdg-dark);
+    background-color: #4CAF50;
+    color: white;
     padding: 5px 10px;
     border-radius: 15px;
     font-weight: bold;
     margin-left: 10px;
+}
+
+/* Product Status Tabs Styling */
+.status-tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.status-tab {
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tab-fresh {
+    background-color: #4CAF50;  /* Green for fresh items */
+    color: white;
+    border: none;
+}
+
+.tab-expiring {
+    background-color: #FFA500;  /* Orange for expiring soon */
+    color: white;
+    border: none;
+}
+
+.tab-expired {
+    background-color: #808080;  /* Gray for expired items */
+    color: white;
+    border: none;
+}
+
+/* Add a specific style for the main heading if needed */
+.main-title {
+    font-size: 3.5rem;
+    color: white;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Style for the subtitle (Help achieve Zero Hunger...) */
+.subtitle {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
