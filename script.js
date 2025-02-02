@@ -41,6 +41,13 @@ class FoodExpiryTracker {
         };
 
         this.html5QrcodeScanner.render(onScanSuccess, onScanError);
+
+        // Add a restart button
+        const restartButton = document.createElement('button');
+        restartButton.textContent = 'Restart Scanner';
+        restartButton.className = 'restart-scanner-btn';
+        restartButton.onclick = () => this.restartScanner();
+        qrReader.parentElement.appendChild(restartButton);
     }
 
     handleQRData(data) {
@@ -96,12 +103,8 @@ class FoodExpiryTracker {
                     </div>
                 `;
 
-                // Clear the scanner after successful scan
-                setTimeout(() => {
-                    if (this.html5QrcodeScanner) {
-                        this.html5QrcodeScanner.clear();
-                    }
-                }, 1000);
+                // Clear and reinitialize scanner
+                this.restartScanner();
 
             } else {
                 console.error('Product validation failed');
@@ -122,6 +125,22 @@ class FoodExpiryTracker {
                     <p>Error: ${error.message}</p>
                 </div>
             `;
+        }
+    }
+
+    restartScanner() {
+        if (this.html5QrcodeScanner) {
+            this.html5QrcodeScanner.clear().then(() => {
+                console.log('Scanner cleared successfully');
+                // Add a slight delay before reinitializing
+                setTimeout(() => {
+                    const qrReader = document.getElementById('qr-reader');
+                    qrReader.innerHTML = ''; // Clear the old scanner UI
+                    this.initializeQRScanner(); // Reinitialize the scanner
+                }, 1000);
+            }).catch((error) => {
+                console.error('Failed to clear scanner:', error);
+            });
         }
     }
 
