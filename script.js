@@ -1,6 +1,12 @@
 class FoodExpiryTracker {
     constructor() {
         this.products = [];
+        this.rewardPoints = 0;
+        this.foodBanks = [
+            { id: 1, name: "Community Food Bank", address: "123 Main St" },
+            { id: 2, name: "Hope Food Center", address: "456 Park Ave" },
+            { id: 3, name: "Local Food Pantry", address: "789 Church St" }
+        ];
         this.initializeQRScanner();
         this.initializeEventListeners();
     }
@@ -43,8 +49,37 @@ class FoodExpiryTracker {
             manufacturingDate: document.getElementById('mfgDate').value,
             expiryDate: document.getElementById('expDate').value
         };
-        this.addProduct(productData);
-        document.getElementById('product-form').reset();
+        
+        if (this.validateProductData(productData)) {
+            this.addProduct(productData);
+            document.getElementById('product-form').reset();
+        }
+    }
+
+    validateProductData(productData) {
+        // Check for empty fields
+        if (!productData.name || !productData.batchNumber || 
+            !productData.manufacturingDate || !productData.expiryDate) {
+            alert('All fields are required');
+            return false;
+        }
+
+        // Validate dates
+        const mfgDate = new Date(productData.manufacturingDate);
+        const expDate = new Date(productData.expiryDate);
+        const today = new Date();
+
+        if (mfgDate > today) {
+            alert('Manufacturing date cannot be in the future');
+            return false;
+        }
+
+        if (expDate < mfgDate) {
+            alert('Expiry date must be after manufacturing date');
+            return false;
+        }
+
+        return true;
     }
 
     addProduct(productData) {
@@ -83,21 +118,50 @@ class FoodExpiryTracker {
         // Clear all lists
         Object.values(categories).forEach(list => list.innerHTML = '');
 
+        // Calculate stock levels for each batch number
+        const stockLevels = this.products.reduce((acc, product) => {
+            acc[product.batchNumber] = (acc[product.batchNumber] || 0) + 1;
+            return acc;
+        }, {});
+
+        // Sort products by expiry date
+        const sortedProducts = [...this.products].sort((a, b) => 
+            new Date(a.expiryDate) - new Date(b.expiryDate)
+        );
+
         // Populate lists
-        this.products.forEach(product => {
-            const li = this.createProductListItem(product);
+        sortedProducts.forEach(product => {
+            const li = this.createProductListItem(product, stockLevels[product.batchNumber]);
             categories[product.status].appendChild(li);
         });
     }
 
-    createProductListItem(product) {
+    createProductListItem(product, stockLevel) {
         const li = document.createElement('li');
         li.className = `product-item ${product.status}`;
+        
+        const mfgDate = new Date(product.manufacturingDate).toLocaleDateString();
+        const expDate = new Date(product.expiryDate).toLocaleDateString();
+        const daysUntilExpiry = Math.ceil((new Date(product.expiryDate) - new Date()) / (1000 * 60 * 60 * 24));
+        
         li.innerHTML = `
-            <input type="checkbox" data-id="${product.id}">
-            <span>${product.name}</span>
-            <span>Batch: ${product.batchNumber}</span>
-            <span>Expires: ${new Date(product.expiryDate).toLocaleDateString()}</span>
+            <div class="product-info">
+                <input type="checkbox" data-id="${product.id}">
+                <div class="product-details">
+                    <h3>${product.name}</h3>
+                    <div class="details-grid">
+                        <span>Batch: ${product.batchNumber}</span>
+                        <span>Stock Level: ${stockLevel} items</span>
+                        <span>Mfg Date: ${mfgDate}</span>
+                        <span>Exp Date: ${expDate}</span>
+                        <span class="expiry-days ${product.status}">
+                            ${daysUntilExpiry > 0 ? 
+                                `${daysUntilExpiry} days until expiry` : 
+                                'Expired'}
+                        </span>
+                    </div>
+                </div>
+            </div>
         `;
         return li;
     }
@@ -115,8 +179,15 @@ class FoodExpiryTracker {
             alert('Please select products to donate');
             return;
         }
-        
-        alert('Donation confirmed! The food bank will be notified.');
+
+        const foodBankSelect = document.getElementById('foodBankSelect');
+        if (!foodBankSelect.value) {
+            alert('Please select a food bank for donation');
+            return;
+        }
+
+        const selectedFoodBank = this.foodBanks.find(fb => fb.id === parseInt(foodBankSelect.value));
+        alert(`Donation confirmed! The items will be sent to ${selectedFoodBank.name}`);
         this.removeProducts(selectedProducts);
     }
 
@@ -138,8 +209,20 @@ class FoodExpiryTracker {
             return;
         }
         
-        alert('Products marked for recycling. Thank you for being environmentally conscious!');
+        // Award points for recycling (10 points per item)
+        const pointsEarned = selectedProducts.length * 10;
+        this.rewardPoints += pointsEarned;
+        
+        alert(`Products marked for recycling. You earned ${pointsEarned} points! Total points: ${this.rewardPoints}`);
         this.removeProducts(selectedProducts);
+        this.updateRewardPointsDisplay();
+    }
+
+    updateRewardPointsDisplay() {
+        const pointsDisplay = document.getElementById('rewardPoints');
+        if (pointsDisplay) {
+            pointsDisplay.textContent = this.rewardPoints;
+        }
     }
 
     removeProducts(productsToRemove) {

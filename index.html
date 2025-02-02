@@ -10,7 +10,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Food Expiry Tracker</h1>
+        <div class="header">
+            <h1>Food Expiry Tracker</h1>
+            <p>Help achieve Zero Hunger by managing food waste effectively</p>
+            <div class="reward-points">
+                Reward Points: <span id="rewardPoints">0</span>
+            </div>
+        </div>
 
         <!-- QR Code Scanner -->
         <div class="scanner-container">
@@ -68,6 +74,12 @@
 
         <!-- Action Buttons -->
         <div class="action-buttons">
+            <select id="foodBankSelect" class="food-bank-select">
+                <option value="">Select Food Bank</option>
+                <option value="1">Community Food Bank</option>
+                <option value="2">Hope Food Center</option>
+                <option value="3">Local Food Pantry</option>
+            </select>
             <button id="donate-btn" class="action-btn">Donate Selected Items</button>
             <button id="return-btn" class="action-btn">Return Selected Items</button>
             <button id="recycle-btn" class="action-btn">Recycle Selected Items</button>
